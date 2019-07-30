@@ -28,7 +28,7 @@ class RussellEnclosure(MycroftSkill):
         # Initialize...
         self.brightness_dict = self.translate_namedvalues('brightness.levels')
         self.color_dict = self.translate_namedvalues('colors')
-        self.settings['web eye color'] = self.settings['eye color']
+        #self.settings['web eye color'] = self.settings['eye color']
 
         try:
             # Handle changing the eye color once Mark 1 is ready to go
