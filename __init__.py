@@ -1,3 +1,17 @@
+# Copyright 2017 Mycroft AI Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from datetime import datetime, timedelta
 
 from mycroft.messagebus.message import Message
@@ -95,7 +109,7 @@ class RussellEnclosure(MycroftSkill):
     def on_handler_complete(self, message):
         handler = message.data.get("handler", "")
         # Ignoring handlers from this skill and from the background clock
-        if "Mark1" in handler:
+        if "RussellEnclosure" in handler:
             return
         if "TimeSkill.update_display" in handler:
             return
@@ -111,6 +125,13 @@ class RussellEnclosure(MycroftSkill):
             # catches the mycroft.skill.handler.complete
             pass
 
+    #####################################################################
+    # Manage network connction feedback
+
+    def handle_internet_connected(self, message):
+        # System came online later after booting
+        self.enclosure.mouth_reset()
+        self.set_eye_color(self.settings['current_eye_color'], speak=False)
 
 def create_skill():
     return RussellEnclosure()
