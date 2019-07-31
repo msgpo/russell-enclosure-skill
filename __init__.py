@@ -130,8 +130,9 @@ class RussellEnclosure(MycroftSkill):
 
     def handle_internet_connected(self, message):
         # System came online later after booting
-        self.enclosure.mouth_reset()
-        self.set_eye_color(self.settings['current_eye_color'], speak=False)
+    #    self.enclosure.mouth_reset()
+    #    self.set_eye_color(self.settings['current_eye_color'], speak=False)
+        pass
 
 def create_skill():
     return RussellEnclosure()
